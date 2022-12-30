@@ -1,0 +1,16 @@
+﻿@using ECC.Data.Models;
+
+<h4>Available checklists</h4>
+<div class="">
+	<ul class="list-group">
+		@foreach (var airplane in list)
+		{
+			<li class="list-group-item"><a class="btn btn-primary" href="@($"/checklist/{airplane.AirplaneId}")">@airplane.Name</a></li>
+		}
+	</ul>
+</div>
+
+@code {
+	[Parameter]
+	public List<Airplane> list { get; set; }
+}

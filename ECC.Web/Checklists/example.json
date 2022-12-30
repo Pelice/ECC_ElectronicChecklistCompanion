@@ -1,0 +1,50 @@
+{
+  "Name": "Example",
+  "SimConnectName": null,
+  "Checklist": {
+    "Sections": [
+      {
+        "SectionName": "Secure cabin",
+        "ChecklistItems": [
+          {
+            "Description": "Landing gear",
+            "Value": "DOWN",
+            "Notes": null,
+            "ImageName": null,
+            "Checked": false,
+            "itemId": "landinggear"
+          },
+          {
+            "Description": "Speed-brakes",
+            "Value": "DOWN",
+            "Notes": null,
+            "ImageName": null,
+            "Checked": false,
+            "itemId": "speed-brakes"
+          }
+        ]
+      },
+      {
+        "SectionName": "Before start",
+        "ChecklistItems": [
+          {
+            "Description": "Parking brake",
+            "Value": "SET",
+            "Notes": null,
+            "ImageName": null,
+            "Checked": false,
+            "itemId": "parkingbrake"
+          },
+          {
+            "Description": "Chocks",
+            "Value": "REMOVED",
+            "Notes": null,
+            "ImageName": null,
+            "Checked": false,
+            "itemId": "chocks"
+          }
+        ]
+      }
+    ]
+  }
+}

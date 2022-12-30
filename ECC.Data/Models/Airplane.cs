@@ -11,5 +11,6 @@ namespace ECC.Data.Models
         public string? Name { get; set; }
         public string? SimConnectName { get; set; }
         public ChecklistMain? Checklist { get; set; }
+        public string? AirplaneId => Name?.Replace(" ", "").ToLower();
     }
 }

@@ -1,0 +1,42 @@
+﻿{
+  "Name": "Boeing 737NG",
+  "SimConnectName": null,
+  "Checklist": {
+	"Sections": [
+	  {
+		"SectionName": "Secure cabin",
+		"ChecklistItems": [
+		  {
+			"Description": "Landing Gear",
+			"Value": "DOWN",
+			"Notes": null,
+			"ImageName": null
+		  },
+		  {
+			"Description": "Speed-brake",
+			"Value": "DOWN",
+			"Notes": "Lever pushed down",
+			"ImageName": null
+		  }
+		]
+	  },
+	  {
+		"SectionName": "Before start",
+		"ChecklistItems": [
+		  {
+			"Description": "Parking brake",
+			"Value": "SET",
+			"Notes": null,
+			"ImageName": null
+		  },
+		  {
+			"Description": "Chocks",
+			"Value": "REMOVED",
+			"Notes": null,
+			"ImageName": null
+		  }
+		]
+	  }
+	]
+  }
+}

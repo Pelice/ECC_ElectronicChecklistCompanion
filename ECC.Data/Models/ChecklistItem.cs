@@ -8,9 +8,11 @@ namespace ECC.Data.Models
 {
 	public class ChecklistItem
 	{
-		public string? Content { get; set; }
+		public string? Description { get; set; }
+		public string? Value { get; set; }
 		public string? Notes { get; set; }
 		public string? ImageName { get; set; }
-		public bool Checked { get; set; }
+		public bool Checked { get; set; } = false;
+		public string itemId  => $"{Description?.Replace(" ","").ToLower()}";
 	}
 }

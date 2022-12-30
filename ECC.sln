@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECC.Web", "ECC.Web\ECC.Web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECC.Data", "ECC.Data\ECC.Data.csproj", "{49F4D0E6-82DD-47FB-9544-747131E2309E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ecc.Core", "Ecc.Core\Ecc.Core.csproj", "{6E70CFCA-932C-4D32-8EA4-2210F82CB3FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecc.Core", "Ecc.Core\Ecc.Core.csproj", "{6E70CFCA-932C-4D32-8EA4-2210F82CB3FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,3 +1,5 @@
+using Ecc.Core;
+using ECC.Core;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using NLog;
@@ -15,6 +17,16 @@ try
 	// NLog: Setup NLog for Dependency injection
 	builder.Logging.ClearProviders();
 	builder.Host.UseNLog();
+
+	string checklistFolder =  Path.Combine(builder.Environment.ContentRootPath, "Checklists");
+	logger.Info($"Checlist folder: {checklistFolder}");
+
+	builder.Services.AddSingleton<NLog.ILogger>( logger );
+
+	ChecklistFileManager checklistFileManager = new ChecklistFileManager(checklistFolder);
+	builder.Services.AddSingleton<ChecklistFileManager>(checklistFileManager);
+
+	//Utils.ChecklistFileExampleGeneration(checklistFolder);
 
 	var app = builder.Build();
 

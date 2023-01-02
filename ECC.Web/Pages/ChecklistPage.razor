@@ -1,0 +1,64 @@
+﻿@page "/checklist/{aircraftId}"
+@using ECC.Core;
+@using ECC.Data.Models;
+@inject ChecklistFileManager _fileManager;
+@inject ILogger<ChecklistPage> _logger;
+@inject NLog.ILogger _nlog;
+
+
+@if (airplaneData == null)
+{
+	<div class="card">
+		<div class="card-header">
+			<p class="text-danger">No checklist data available for id @aircraftId</p>
+		</div>
+	</div>
+}
+else
+{
+	<div class="card">
+		<div class="card-header">
+			@airplaneData.Name
+		</div>
+		<div class="card-body">
+
+			@if (airplaneData != null && airplaneData.Checklist != null && airplaneData.Checklist.Sections.Count > 0)
+			{
+				@foreach (var section in airplaneData.Checklist.Sections)
+				{
+					<ECC.Web.Components.Checklist.SectionView sectionName="section.SectionName"
+												  checklistItems="section.ChecklistItems" />
+				}
+			}
+		</div>
+	</div>
+}
+
+
+@code {
+	[Parameter]
+	public string? aircraftId { get; set; }
+
+	public Airplane? airplaneData { get; set; }
+
+
+	protected override void OnParametersSet()
+	{
+		if (!string.IsNullOrEmpty(aircraftId))
+		{
+			LoadAircraftData(aircraftId);
+		}
+	}
+
+	private async void LoadAircraftData(string airplaneChecklistId)
+	{
+		try
+		{
+			airplaneData = await _fileManager.GetChecklistForAirplane(airplaneChecklistId);
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError($"{ex.Message}");
+		}
+	}
+}

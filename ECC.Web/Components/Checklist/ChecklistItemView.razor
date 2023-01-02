@@ -1,0 +1,39 @@
+﻿@using ECC.Data.Models;
+
+<div class="card mb-1">
+	<div class="card-body" style="@rowItemStyle">
+		<div class="row" @onclick="ToggleItemChecked" >
+			<div class="col">
+				<h5 class="card-title">@item.Description</h5>
+				<p>@item.Notes</p>
+			</div>
+			<div class="col text-end">
+				<h5 class="card-title">@item.Value</h5>
+			</div>
+			<div class="col-1 text-center">
+				@if (item.Checked)
+				{
+					<img src="/images/check.png" width="35px"/>
+				}
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+
+@code {
+	[Parameter]
+	public ChecklistItem? item { get; set; }
+
+	private string rowItemStyle = "";
+
+	private void ToggleItemChecked()
+	{
+		item.Checked = !item.Checked;
+		if (item.Checked)
+			rowItemStyle = "background-color: #92ffa047;";
+		else
+			rowItemStyle = "";
+	}
+}

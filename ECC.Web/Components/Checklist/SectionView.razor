@@ -1,0 +1,22 @@
+﻿@using ECC.Data.Models;
+
+
+<div class="card mt-2 mb-2">
+	<div class="card-body">
+		<h5 class="card-title">@sectionName</h5>
+		@foreach (var i in checklistItems)
+		{
+			<ChecklistItemView item="@i" />
+		}
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string sectionName { get; set; }
+
+	[Parameter]
+	public List<ChecklistItem> checklistItems { get; set; } = new List<ChecklistItem>();
+
+
+}

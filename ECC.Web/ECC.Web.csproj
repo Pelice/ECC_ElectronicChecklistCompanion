@@ -16,4 +16,8 @@
     <ProjectReference Include="..\ECC.Data\ECC.Data.csproj" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+	<Exec Command=" xcopy /F /Y ..\Storage\ .\$(OutDir)\Storage\" />
+  </Target>
+
 </Project>

@@ -1,7 +1,7 @@
-﻿@page "/checklist/{aircraftId}"
+﻿@page "/checklist/{checklistId:int}"
 @using ECC.Core;
 @using ECC.Data.Models;
-@inject ChecklistFileManager _fileManager;
+@inject IChecklistManager _manager;
 @inject ILogger<ChecklistPage> _logger;
 @inject NLog.ILogger _nlog;
 
@@ -10,7 +10,7 @@
 {
 	<div class="card">
 		<div class="card-header">
-			<p class="text-danger">No checklist data available for id @aircraftId</p>
+			<p class="text-danger">No checklist data available for id @checklistId</p>
 		</div>
 	</div>
 }
@@ -18,13 +18,13 @@ else
 {
 	<div class="card">
 		<div class="card-header">
-			@airplaneData.Name
+			@airplaneData.AirplaneName
 		</div>
 		<div class="card-body">
 
-			@if (airplaneData != null && airplaneData.Checklist != null && airplaneData.Checklist.Sections.Count > 0)
+			@if (_checklist != null && _checklist.Sections.Count > 0)
 			{
-				@foreach (var section in airplaneData.Checklist.Sections)
+				@foreach (var section in _checklist.Sections)
 				{
 					<ECC.Web.Components.Checklist.SectionView sectionName="section.SectionName"
 												  checklistItems="section.ChecklistItems" />
@@ -37,24 +37,30 @@ else
 
 @code {
 	[Parameter]
-	public string? aircraftId { get; set; }
+	public int? checklistId { get; set; }
 
 	public Airplane? airplaneData { get; set; }
 
+	private Checklist? _checklist;
 
 	protected override void OnParametersSet()
 	{
-		if (!string.IsNullOrEmpty(aircraftId))
+		if (checklistId != null && checklistId > 0)
 		{
-			LoadAircraftData(aircraftId);
+			LoadAircraftData((int)checklistId);
 		}
 	}
 
-	private async void LoadAircraftData(string airplaneChecklistId)
+	private async void LoadAircraftData(int checklistId)
 	{
 		try
 		{
-			airplaneData = await _fileManager.GetChecklistForAirplane(airplaneChecklistId);
+			airplaneData = await _manager.GetChecklistForAirplane(checklistId);
+
+			if (airplaneData != null)
+				_checklist = airplaneData.Checklist.Where(x => x.ChecklistId == checklistId).FirstOrDefault();
+
+			StateHasChanged();
 		}
 		catch (Exception ex)
 		{

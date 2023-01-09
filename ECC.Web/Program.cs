@@ -1,5 +1,6 @@
 using Ecc.Core;
 using ECC.Core;
+using ECC.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using NLog;
@@ -23,8 +24,25 @@ try
 
 	builder.Services.AddSingleton<NLog.ILogger>( logger );
 
-	ChecklistFileManager checklistFileManager = new ChecklistFileManager(checklistFolder);
-	builder.Services.AddSingleton<ChecklistFileManager>(checklistFileManager);
+	//old checklist on file manager
+	//IChecklistManager checklistFileManager = new ChecklistFileManager(checklistFolder, logger);
+
+	//checklists using SQL Lite
+	string storageFolder = Path.Combine(builder.Environment.ContentRootPath, "Storage");
+	if (builder.Environment.IsDevelopment()) {
+		var parent = Directory.GetParent(builder.Environment.ContentRootPath).FullName.ToString();
+		storageFolder = Path.Combine(parent, "Storage");
+	}
+
+	string databaseFileName = "database.db";
+	if (!File.Exists(Path.Combine(storageFolder, databaseFileName))){
+		logger.Error($"Database file {databaseFileName} not found in folder {storageFolder}");
+		return;
+	}
+	var sqliteStorage = new SQLiteStorageManager(storageFolder, databaseFileName);
+
+	IChecklistManager checklistFileManager = new ChecklistSqlManager(sqliteStorage);
+	builder.Services.AddSingleton<IChecklistManager>(checklistFileManager);
 
 	//Utils.ChecklistFileExampleGeneration(checklistFolder);
 

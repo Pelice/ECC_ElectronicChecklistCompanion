@@ -8,9 +8,9 @@ namespace ECC.Data.Models
 {
     public class Airplane
     {
-        public string? Name { get; set; }
+        public string AirplaneName { get; set; }
         public string? SimConnectName { get; set; }
-        public ChecklistMain? Checklist { get; set; }
-        public string? AirplaneId => Name?.Replace(" ", "").ToLower();
+        public List<Checklist> Checklist { get; set; }
+        public int AirplaneId { get; set; }
     }
 }

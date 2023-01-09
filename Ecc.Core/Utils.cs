@@ -25,42 +25,44 @@ namespace Ecc.Core
 
 			Airplane example = new Airplane()
 			{
-				Name = "Example",
+				AirplaneName = "Example",
 				SimConnectName = null,
-				Checklist = new ChecklistMain()
+				Checklist = new List<Checklist>()
 				{
-					Sections = new List<ChecklistSection> {
-						new ChecklistSection()
-						{
-							SectionName = "Secure cabin",
-							ChecklistItems = new List<ChecklistItem>
+					new Checklist() {
+						Sections = new List<ChecklistSection> {
+							new ChecklistSection()
 							{
-								new ChecklistItem()
+								SectionName = "Secure cabin",
+								ChecklistItems = new List<ChecklistItem>
 								{
-									Description="Landing gear",
-									Value = "DOWN"
-								},
-								new ChecklistItem()
-								{
-									Description="Speed-brakes",
-									Value = "DOWN"
+									new ChecklistItem()
+									{
+										Description="Landing gear",
+										Value = "DOWN"
+									},
+									new ChecklistItem()
+									{
+										Description="Speed-brakes",
+										Value = "DOWN"
+									}
 								}
-							}
-						},
-						new ChecklistSection()
-						{
-							SectionName = "Before start",
-							ChecklistItems = new List<ChecklistItem>
+							},
+							new ChecklistSection()
 							{
-								new ChecklistItem()
+								SectionName = "Before start",
+								ChecklistItems = new List<ChecklistItem>
 								{
-									Description="Parking brake",
-									Value = "SET"
-								},
-								new ChecklistItem()
-								{
-									Description="Chocks",
-									Value = "REMOVED"
+									new ChecklistItem()
+									{
+										Description="Parking brake",
+										Value = "SET"
+									},
+									new ChecklistItem()
+									{
+										Description="Chocks",
+										Value = "REMOVED"
+									}
 								}
 							}
 						}

@@ -1,9 +1,9 @@
 ﻿@page "/"
 @using ECC.Core;
 @using ECC.Data.Models;
-@inject ChecklistFileManager _fileManager;
+@inject IChecklistManager _manager;
 @inject ILogger<Index> _logger;
-@inject NLog.ILogger _nlog;
+@*@inject NLog.ILogger _nlog;*@
 
 <section class="py-5 text-center container">
 	<div class="row py-lg-5">
@@ -35,7 +35,7 @@
 	private async Task ReloadList()
 	{
 		try{
-			airplaneChecklistList = await _fileManager.GetAvailableAirplaneChecklists(_nlog);
+			airplaneChecklistList = await _manager.GetAvailableAirplaneChecklists();
 		} catch(Exception ex)
 		{
 			_logger.LogError($"{ex.Message}");
